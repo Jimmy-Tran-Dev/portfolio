@@ -1,26 +1,240 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap');
 @import "tailwindcss";
 
+@theme {
+  --color-frog-50:  #f2faf0;
+  --color-frog-100: #e0f5db;
+  --color-frog-200: #c2eab9;
+  --color-frog-300: #98d68a;
+  --color-frog-400: #6cbe59;
+  --color-frog-500: #4aa33a;
+  --color-frog-600: #37832b;
+  --color-frog-700: #2d6724;
+  --color-frog-800: #265220;
+  --color-frog-900: #1f431b;
+  --color-cream:    #faf8f0;
+  --color-lily:     #d4edda;
+  --color-pond:     #b8dfc5;
+  --color-moss:     #7aad76;
+  --color-mud:      #8b7355;
+
+  --font-display: "Fredoka", sans-serif;
+  --font-body:    "DM Mono", monospace;
+
+  --animate-bob:      bob 3s ease-in-out infinite;
+  --animate-wiggle:   wiggle 0.4s ease-in-out;
+  --animate-ripple:   ripple 1s ease-out forwards;
+  --animate-sparkle:  sparkle 1.5s ease-in-out infinite;
+  --animate-float-in: float-in 0.6s ease-out forwards;
+  --animate-ping:     ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+  --animate-pulse:    pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-bounce:   bounce 1s infinite;
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0px) rotate(-2deg); }
+  50%       { transform: translateY(-12px) rotate(2deg); }
+}
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-3deg); }
+  50%       { transform: rotate(3deg); }
+}
+@keyframes ripple {
+  0%   { transform: scale(0); opacity: 0.6; }
+  100% { transform: scale(3); opacity: 0; }
+}
+@keyframes sparkle {
+  0%, 100% { opacity: 1;   transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.7); }
+}
+@keyframes float-in {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes ping {
+  75%, 100% { transform: scale(2); opacity: 0; }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --cream:      #faf8f0;
+  --lily:       #d4edda;
+  --pond:       #b8dfc5;
+  --moss:       #7aad76;
+  --frog-green: #6cbe59;
+  --mud:        #8b7355;
+  --text-dark:  #2d4a2a;
+  --text-mid:   #4a6b47;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--cream);
+  color: var(--text-dark);
+  font-family: 'DM Mono', monospace;
+  cursor: none;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--lily); }
+::-webkit-scrollbar-thumb { background: var(--pond); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--moss); }
+
+/* Custom cursor */
+.cursor {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--frog-green);
+  opacity: 0.6;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
+  mix-blend-mode: multiply;
+}
+
+.cursor.hovering {
+  width: 40px;
+  height: 40px;
+  opacity: 0.3;
+}
+
+/* Noise texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* Animated gradient orbs */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.35;
+  animation: drift 8s ease-in-out infinite alternate;
+}
+
+@keyframes drift {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(30px, -20px) scale(1.05); }
+}
+
+/* Section fade-in */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered children */
+.stagger > * { transition-delay: calc(var(--i, 0) * 80ms); }
+
+/* Lily pad button */
+.btn-lily {
+  background: var(--pond);
+  color: var(--text-dark);
+  border-radius: 99px;
+  padding: 0.6rem 1.6rem;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  border: 2px solid transparent;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  cursor: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.btn-lily:hover {
+  background: var(--moss);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--pond);
+  color: var(--text-mid);
+  border-radius: 99px;
+  padding: 0.6rem 1.6rem;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: all 0.2s;
+  cursor: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.btn-outline:hover {
+  background: var(--lily);
+  border-color: var(--moss);
+  transform: translateY(-2px);
+}
+
+/* Project cards */
+.project-card {
+  background: white;
+  border-radius: 20px;
+  border: 2px solid var(--lily);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  overflow: hidden;
+}
+.project-card:hover {
+  transform: translateY(-6px) rotate(0.5deg);
+  box-shadow: 0 16px 40px rgba(106, 185, 89, 0.2);
+  border-color: var(--pond);
+}
+
+/* Skill pill */
+.skill-pill {
+  background: var(--lily);
+  color: var(--text-mid);
+  border-radius: 99px;
+  padding: 0.3rem 0.9rem;
+  font-size: 0.8rem;
+  font-family: 'DM Mono', monospace;
+  border: 1.5px solid var(--pond);
+  display: inline-block;
+  transition: background 0.15s, transform 0.15s;
+}
+.skill-pill:hover {
+  background: var(--pond);
+  transform: scale(1.05);
+}
+
+/* Nav dot indicator */
+.nav-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--pond);
+  transition: background 0.2s, transform 0.2s;
+}
+.nav-dot.active {
+  background: var(--moss);
+  transform: scale(1.3);
 }
