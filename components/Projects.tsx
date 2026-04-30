@@ -1,65 +1,68 @@
 "use client";
 import { useEffect, useRef } from "react";
+import { FaFile, FaFileInvoiceDollar, FaPerson } from "react-icons/fa6";
+import { MdEvent, MdOutlineSportsSoccer } from "react-icons/md";
+import { CgWebsite } from "react-icons/cg";
 
 const projects = [
   {
     title: "Fragments Microservice",
-    desc: "",
-    tags: [],
-    emoji: "",
+    desc: "A cloud-based REST microservice for storing and converting unstructured data fragments (text, images, JSON). Built with a separate React UI, supports multiple MIME types, authentication via AWS Cognito, and is fully containerized with Docker and deployed to AWS ECS.",
+    tags: ["Node.js", "Express", "Docker", "AWS ECS", "AWS Cognito", "React", "Jest"],
+    emoji: <FaFile/>,
     color: "#e8f5e1",
-    link: "#",
-    github: "#",
+    link: "",
+    github: "https://github.com/JTran001/fragments",
     featured: true,
   },
   {
     title: "Bookwise Invoicing",
-    desc: "",
-    tags: [],
-    emoji: "",
+    desc: "A full-stack invoicing and financial dashboard built with Next.js 15. Features customer management, invoice creation and status tracking, and an overview dashboard with revenue charts. Uses PostgreSQL with server actions and is deployed on Vercel.",
+    tags: ["Next.js", "TypeScript", "PostgreSQL", "Tailwind CSS", "Vercel"],
+    emoji: <FaFileInvoiceDollar/>,
     color: "#e1f0f5",
-    link: "#",
-    github: "#",
+    link: "https://bookwise-invoices.vercel.app/",
+    github: "https://github.com/Jimmy-Tran-Dev/nextjs-dashboard",
     featured: true,
   },
   {
     title: "NoTimeToWait",
-    desc: "",
-    tags: [],
-    emoji: "",
+    desc: "Production website for LetsStopAIDS' national youth HIV advocacy summit. Features event registration, agenda, scholarship applications, and volunteer sign-ups. Built for the 2025 summit held in Toronto.",
+    tags: ["Next.js", "React", "Cloudinary", "TypeScript", "Hygraph", "Tailwind"],
+    emoji: <MdEvent/>,
     color: "#f5f0e1",
-    link: "#",
-    github: "#",
+    link: "https://notimetowait.ca",
+    github: "",
     featured: false,
   },
   {
     title: "Employee Manager Web App",
-    desc: "",
-    tags: [],
-    emoji: "",
+    desc: "A full-stack employee management system with a REST API backend and a separate React frontend",
+    tags: ["Node.js", "Express", "React", "RESTful API", "Vercel", "Bootstrap", "SQL", "Git"],
+    emoji: <FaPerson/>,
     color: "#f0e1f5",
-    link: "#",
-    github: "#",
+    link: "",
+    github: "https://github.com/n3ling/EmployeeManager",
     featured: false,
   },
   {
     title: "Sports Motion Detector",
-    desc: "",
-    tags: [],
-    emoji: "",
+    desc: "This project implements a motion detection system for sports videos, featuring a dynamic viewport that follows detected motion through frame subtraction",
+    tags: ["Python", "Numpy", "cv2", "matplotlib", "tensorflow", "sklean", "keras"],
+    emoji: <MdOutlineSportsSoccer/>,
     color: "#e1f5ee",
-    link: "#",
-    github: "#",
+    link: "",
+    github: "https://github.com/marythedev/motion-detection",
     featured: false,
   },
   {
     title: "Portfolio v1",
     desc: "My first portfolio site — the one you're looking at is v2!",
     tags: ["HTML", "CSS", "Vanilla JS"],
-    emoji: "",
+    emoji: <CgWebsite/>,
     color: "#f5e8e1",
-    link: "#",
-    github: "#",
+    link: "https://jimmy-tran-dev.github.io/first-website/",
+    github: "https://github.com/Jimmy-Tran-Dev/first-website",
     featured: false,
   },
 ];
@@ -170,9 +173,9 @@ export default function Projects() {
                 <a href={p.github} className="btn-outline text-xs py-1.5 px-3">
                   <GitHubIcon /> code
                 </a>
-                <a href={p.link} className="btn-lily text-xs py-1.5 px-3">
+                {p.link !== "" && <a href={p.link} className="btn-lily text-xs py-1.5 px-3">
                   <ExternalIcon /> live demo
-                </a>
+                </a>}
               </div>
             </div>
           ))}
@@ -210,12 +213,12 @@ export default function Projects() {
                 ))}
               </div>
               <div className="flex gap-2">
-                <a href={p.github} style={{ color: "var(--moss)", cursor: "none" }}>
+                {p.github !== "" && <a href={p.github} style={{ color: "var(--moss)", cursor: "none" }}>
                   <GitHubIcon />
-                </a>
-                <a href={p.link} style={{ color: "var(--moss)", cursor: "none" }}>
+                </a>}
+                {p.link !== "" && <a href={p.link} style={{ color: "var(--moss)", cursor: "none" }}>
                   <ExternalIcon />
-                </a>
+                </a>}
               </div>
             </div>
           ))}
