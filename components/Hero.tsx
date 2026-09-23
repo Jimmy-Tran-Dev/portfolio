@@ -64,16 +64,16 @@ export default function Hero() {
             }}
           >
             <span className="relative inline-flex items-center justify-center w-3 h-3">
-              <span
+              {/* <span
                 className="absolute inline-flex w-full h-full rounded-full opacity-75 animate-ping"
                 style={{ background: "var(--moss)" }}
-              />
+              /> */}
               <span
                 className="relative inline-flex w-2 h-2 rounded-full"
                 style={{ background: "var(--frog-green)" }}
               />
             </span>
-            Available for work
+            Currently employed :)
           </div>
 
           <h1
