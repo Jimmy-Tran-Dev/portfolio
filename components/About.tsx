@@ -75,7 +75,7 @@ export default function About() {
 
             <p style={{ color: "var(--text-mid)", fontFamily: "DM Mono", lineHeight: 1.8, fontSize: 14 }}>
               I enjoy working across the stack—from designing intuitive, polished interfaces to building reliable backend systems. I focus on creating web experiences that feel as good as they function. 
-              When I&apos;m not coding, you can find me painting figures or hunting for the perfect matcha latte.
+              When I&apos;m not coding, you can find me drawing or painting figures.
             </p>
 
             <a href="/resume.pdf" className="btn-lily inline-flex">
