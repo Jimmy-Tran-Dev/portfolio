@@ -88,7 +88,7 @@ export default function Hero() {
             className="text-lg leading-relaxed max-w-md"
             style={{ color: "var(--text-mid)", fontFamily: "DM Mono" }}
           >
-            a full-stack developer who functional things on the web.
+            a full-stack developer who builds functional things on the web.
             I like clean code, good design, and learning new things!
           </p>
 
